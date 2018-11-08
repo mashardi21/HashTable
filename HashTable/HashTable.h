@@ -33,12 +33,54 @@ public:
 
 		while (nodesArr[hashedKey] != NULL && nodesArr[hashedKey]->getKey() != key)
 		{
-			hashedKey++;
+			if (hashedKey == _tableSize - 1)
+			{
+				hashedKey = 0;
+			}
+			else
+			{
+				hashedKey++;
+			}
 		}
 
 		nodesArr[hashedKey] = newNode;
 	}
 
+	T retrieve(K keyToFind)
+	{
+		Node<T, K>* foundNode;
+
+		int hashedKey = hash(keyToFind);
+
+		while(nodesArr[hashedKey]->getKey() != keyToFind && nodesArr[hashedKey] != NULL)
+		{
+			if (hashedKey == _tableSize - 1)
+			{
+				hashedKey = 0;
+			} 
+			else
+			{
+				hashedKey++;
+			}
+		}
+
+		if(nodesArr[hashedKey] == NULL)
+		{
+			return NULL;
+		} 
+		else
+		{
+			return nodesArr[hashedKey]->getData();
+		}
+
+
+		return foundNode;
+	}
+
+	/*void resizeTable(int tableSize)
+	{
+		
+	}*/
 	 
 private:
 	int _tableSize;

@@ -16,7 +16,7 @@ public:
 
 	HashTable(int size)
 	{
-		_tableSize = size;
+		_tableSize = sizeTable(size);
 		nodesArr = new Node<T, K>*[_tableSize];
 	}
 
@@ -31,7 +31,7 @@ public:
 
 		int hashedKey = hash(newNode->getKey());
 
-		while (nodesArr[hashedKey] != NULL && nodesArr[hashedKey]->getKey() != key)
+		while (nodesArr[hashedKey] != nullptr && nodesArr[hashedKey]->getKey() != key)
 		{
 			if (hashedKey == _tableSize - 1)
 			{
@@ -52,7 +52,7 @@ public:
 
 		int hashedKey = hash(keyToFind);
 
-		while(nodesArr[hashedKey]->getKey() != keyToFind && nodesArr[hashedKey] != NULL)
+		while(nodesArr[hashedKey]->getKey() != keyToFind && nodesArr[hashedKey] != nullptr)
 		{
 			if (hashedKey == _tableSize - 1)
 			{
@@ -64,9 +64,9 @@ public:
 			}
 		}
 
-		if(nodesArr[hashedKey] == NULL)
+		if(nodesArr[hashedKey] == nullptr || nodesArr[hashedKey]->getIsDeleted() == true)
 		{
-			return NULL;
+			return nullptr;
 		} 
 		else
 		{
@@ -75,6 +75,21 @@ public:
 
 
 		return foundNode;
+	}
+
+	void deleteNode(K keyToDelete)
+	{
+		Node<T, K>* delNode = retrieve(keyToDelete);
+
+		if (delNode->getIsDeleted() == false)
+		{
+			delNode->setIsdeleted(true);
+		}
+	}
+
+	int sizeTable(int size)
+	{
+		
 	}
 
 	/*void resizeTable(int tableSize)

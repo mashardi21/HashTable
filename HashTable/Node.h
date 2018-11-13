@@ -7,12 +7,14 @@ class Node
 public:
 	Node()
 	{
+		_isDeleted = false;
 		_key = "default";
 		_data = 0;
 	}
 
 	Node(K key, T data)
 	{
+		_isDeleted = false;
 		_key = key;
 		_data = data;
 	}
@@ -22,9 +24,14 @@ public:
 		_key = key;
 	}
 
-	void setdata(T data)
+	void setData(T data)
 	{
 		_data = data;
+	}
+
+	 void setIsdeleted (bool isdeleted)
+	{
+		 _isDeleted = isdeleted;
 	}
 
 	K getKey()
@@ -36,9 +43,14 @@ public:
 	{
 		return _data;
 	}
+
+	bool getIsDeleted() {
+		return _isDeleted;
+	}
 private:
 	K _key;
 	T _data;
+	bool _isDeleted;
 };
 
 #endif // NODE_H
